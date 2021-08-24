@@ -1,4 +1,4 @@
-package com.javatpoint;
+package com.booking.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,11 +10,10 @@ import java.util.Date;
 public class Booking implements Serializable
 {
 
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="BOOKING_SEQ")
+	@GeneratedValue ( strategy = GenerationType.SEQUENCE, generator = "BOOKING_SEQ" )
 
-	@SequenceGenerator(name="BOOKING_SEQ",sequenceName="booking_reservation_id_seq",allocationSize=1)
+	@SequenceGenerator ( name = "BOOKING_SEQ", sequenceName = "booking_reservation_id_seq", allocationSize = 1 )
 
 	private int		reservationId;
 	private String	outlet;
@@ -30,6 +29,11 @@ public class Booking implements Serializable
 	private String	bookedDt;
 	private String	foodAllergy;
 	private String	remarks;
+	private String	status;
+
+	public Booking ()
+	{
+	}
 
 	public int getReservationId ()
 	{
@@ -101,8 +105,6 @@ public class Booking implements Serializable
 		this.noOfTables = noOfTables;
 	}
 
-
-
 	public String getBookedBy ()
 	{
 		return bookedBy;
@@ -143,17 +145,29 @@ public class Booking implements Serializable
 		this.remarks = remarks;
 	}
 
-	public Date getResvDate() {
+	public Date getResvDate ()
+	{
 		return resvDate;
 	}
 
-	public void setResvDate(Date resvDate) {
+	public void setResvDate ( Date resvDate )
+	{
 		this.resvDate = resvDate;
+	}
+
+	public String getStatus ()
+	{
+		return status;
+	}
+
+	public void setStatus ( String status )
+	{
+		this.status = status;
 	}
 
 	@Override
 	public String toString ()
 	{
-		return "Booking{" + "reservationId=" + reservationId + ", outlet='" + outlet + '\'' + ", villaNo='" + villaNo + '\'' + ", guestName='" + guestName + '\'' + ", mealPlan='" + mealPlan + '\'' + ", noOfPax=" + noOfPax + ", noOfTables=" + noOfTables + ", resvDate=" + resvDate + ", bookedBy='" + bookedBy + '\'' + ", bookedDt='" + bookedDt + '\'' + ", foodAllergy='" + foodAllergy + '\'' + ", remarks='" + remarks + '\'' + '}';
+		return "Booking{" + "reservationId=" + reservationId + ", outlet='" + outlet + '\'' + ", villaNo='" + villaNo + '\'' + ", guestName='" + guestName + '\'' + ", mealPlan='" + mealPlan + '\'' + ", noOfPax=" + noOfPax + ", noOfTables=" + noOfTables + ", resvDate=" + resvDate + ", bookedBy='" + bookedBy + '\'' + ", bookedDt='" + bookedDt + '\'' + ", foodAllergy='" + foodAllergy + '\'' + ", remarks='" + remarks + '\'' + ", status='" + status + '\'' + '}';
 	}
 }
