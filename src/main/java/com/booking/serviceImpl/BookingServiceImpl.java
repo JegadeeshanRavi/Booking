@@ -20,7 +20,7 @@ public class BookingServiceImpl implements BookingService
 	@Override
 	public List <Booking> getAllBookingByDateAndStatus ( Date date, String status )
 	{
-		return bookingRepo.findByStatusAndResvDateBetween ( status, date, date );
+		return bookingRepo.findByStatusAndResvDate ( status, date );
 	}
 
 	@Override

@@ -1,18 +1,22 @@
 package com.booking.repo;
 
-import com.booking.model.Booking;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.booking.model.Booking;
 
 @Repository
 public interface BookingRepo extends CrudRepository <Booking, Integer>
 {
 	List <Booking> findByVillaNoAndResvDate ( String villaNo, Date resvDate );
 
-	List <Booking> findByStatusAndResvDateBetween ( String status, Date resvDate, Date endDate );
+	@Query ( "SELECT u FROM Booking u WHERE u.status = :status and u.resvDate >= :resvDate" )
+	List <Booking> findByStatusAndResvDate ( @Param ( "status" ) String status, @Param ( "resvDate" ) Date resvDate );
 
 	@Override
 	List <Booking> findAll ();

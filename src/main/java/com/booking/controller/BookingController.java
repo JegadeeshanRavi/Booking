@@ -1,17 +1,13 @@
 package com.booking.controller;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import com.booking.helper.BookingStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import com.booking.helper.BookingStatus;
 import com.booking.model.Allergy;
 import com.booking.model.Booking;
 import com.booking.model.MasterDataResponse;
@@ -33,7 +29,7 @@ public class BookingController
 	private OutletService	outletService;
 
 	@PostMapping ( value = "/createBooking" )
-	public Booking saveBooking ( Booking booking )
+	public Booking saveBooking ( @RequestBody Booking booking )
 	{
 		// List <Booking> bookingList = bookingRepo.findByResvDate ( date );
 		List <Booking> bookingList = bookingService.getDataUsingVillaNoAndDate ( booking.getVillaNo (), booking.getResvDate () );
@@ -50,7 +46,7 @@ public class BookingController
 	}
 
 	@PutMapping ( value = "/updateBooking" )
-	public Booking updateBooking ( Booking booking )
+	public Booking updateBooking ( @RequestBody Booking booking )
 	{
 		Optional <Booking> bookingFromDb = bookingService.getBookingById ( booking.getReservationId () );
 		if ( bookingFromDb.isPresent () )

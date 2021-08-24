@@ -1,10 +1,11 @@
 package com.booking.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Booking implements Serializable
@@ -22,7 +23,7 @@ public class Booking implements Serializable
 	private String	mealPlan;
 	private int		noOfPax;
 	private int		noOfTables;
-	@DateTimeFormat ( pattern = "yyyy-MM-dd'T'HH:mm" )
+	@JsonFormat ( shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm" )
 	private Date	resvDate;
 
 	private String	bookedBy;
