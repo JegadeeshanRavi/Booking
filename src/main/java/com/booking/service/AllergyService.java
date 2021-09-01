@@ -1,14 +1,14 @@
 package com.booking.service;
 
 import com.booking.model.Allergy;
+import com.booking.model.MasterAllergy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 
-public interface AllergyService
-{
+public interface AllergyService {
 
-	List <Allergy> getAllAllergy();
+    List<MasterAllergy> getAllAllergy();
 
 }

@@ -1,13 +1,17 @@
 package com.booking.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Allergy
+public class Allergy implements Serializable
 {
 
 	@Id
+
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ALLERGY_SEQ")
+
+	@SequenceGenerator(name = "ALLERGY_SEQ", sequenceName = "allergy_id_seq", allocationSize = 1)
 	private int		allergyId;
 	private String	allergyName;
 

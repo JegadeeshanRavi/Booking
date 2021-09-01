@@ -1,174 +1,154 @@
 package com.booking.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Entity
-public class Booking implements Serializable
-{
+public class Booking implements Serializable {
 
-	@Id
-	@GeneratedValue ( strategy = GenerationType.SEQUENCE, generator = "BOOKING_SEQ" )
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOOKING_SEQ")
 
-	@SequenceGenerator ( name = "BOOKING_SEQ", sequenceName = "booking_reservation_id_seq", allocationSize = 1 )
+    @SequenceGenerator(name = "BOOKING_SEQ", sequenceName = "booking_reservation_id_seq", allocationSize = 1)
 
-	private int		reservationId;
-	private String	outlet;
-	private String	villaNo;
-	private String	guestName;
-	private String	mealPlan;
-	private int		noOfPax;
-	private int		noOfTables;
-	@JsonFormat ( shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm" )
-	private Date	resvDate;
+    private int reservationId;
+    @JsonProperty(required = true)
+    private String outlet;
+    @JsonProperty(required = true)
+    private String villaNo;
+    @JsonProperty(required = true)
+    private String mealPlan;
+    @JsonProperty(required = true)
+    private int noOfPax;
+    @JsonProperty(required = true)
+    private int noOfTables;
+    @JsonProperty(required = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
+    private Date resvDate;
+    @JsonProperty(required = true)
+    private String bookedBy;
 
-	private String	bookedBy;
-	private String	bookedDt;
-	private String	foodAllergy;
-	private String	remarks;
-	private String	status;
 
-	public Booking ()
-	{
-	}
+    private String remarks;
+    @JsonProperty(required = true)
+    private String bookType;
 
-	public int getReservationId ()
-	{
-		return reservationId;
-	}
+    @JsonProperty(required = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "reservation_id", referencedColumnName = "reservationId")
+    private List<UserDetails> guestName;
 
-	public void setReservationId ( int reservationId )
-	{
-		this.reservationId = reservationId;
-	}
+    public Booking() {
+    }
 
-	public String getOutlet ()
-	{
-		return outlet;
-	}
+    public int getReservationId() {
+        return reservationId;
+    }
 
-	public void setOutlet ( String outlet )
-	{
-		this.outlet = outlet;
-	}
+    public void setReservationId(int reservationId) {
+        this.reservationId = reservationId;
+    }
 
-	public String getVillaNo ()
-	{
-		return villaNo;
-	}
+    public String getOutlet() {
+        return outlet;
+    }
 
-	public void setVillaNo ( String villaNo )
-	{
-		this.villaNo = villaNo;
-	}
+    public void setOutlet(String outlet) {
+        this.outlet = outlet;
+    }
 
-	public String getGuestName ()
-	{
-		return guestName;
-	}
+    public String getVillaNo() {
+        return villaNo;
+    }
 
-	public void setGuestName ( String guestName )
-	{
-		this.guestName = guestName;
-	}
+    public void setVillaNo(String villaNo) {
+        this.villaNo = villaNo;
+    }
 
-	public String getMealPlan ()
-	{
-		return mealPlan;
-	}
+    public String getMealPlan() {
+        return mealPlan;
+    }
 
-	public void setMealPlan ( String mealPlan )
-	{
-		this.mealPlan = mealPlan;
-	}
+    public void setMealPlan(String mealPlan) {
+        this.mealPlan = mealPlan;
+    }
 
-	public int getNoOfPax ()
-	{
-		return noOfPax;
-	}
+    public int getNoOfPax() {
+        return noOfPax;
+    }
 
-	public void setNoOfPax ( int noOfPax )
-	{
-		this.noOfPax = noOfPax;
-	}
+    public void setNoOfPax(int noOfPax) {
+        this.noOfPax = noOfPax;
+    }
 
-	public int getNoOfTables ()
-	{
-		return noOfTables;
-	}
+    public int getNoOfTables() {
+        return noOfTables;
+    }
 
-	public void setNoOfTables ( int noOfTables )
-	{
-		this.noOfTables = noOfTables;
-	}
+    public void setNoOfTables(int noOfTables) {
+        this.noOfTables = noOfTables;
+    }
 
-	public String getBookedBy ()
-	{
-		return bookedBy;
-	}
+    public Date getResvDate() {
+        return resvDate;
+    }
 
-	public void setBookedBy ( String bookedBy )
-	{
-		this.bookedBy = bookedBy;
-	}
+    public void setResvDate(Date resvDate) {
+        this.resvDate = resvDate;
+    }
 
-	public String getBookedDt ()
-	{
-		return bookedDt;
-	}
+    public String getBookedBy() {
+        return bookedBy;
+    }
 
-	public void setBookedDt ( String bookedDt )
-	{
-		this.bookedDt = bookedDt;
-	}
+    public void setBookedBy(String bookedBy) {
+        this.bookedBy = bookedBy;
+    }
 
-	public String getFoodAllergy ()
-	{
-		return foodAllergy;
-	}
+    public String getRemarks() {
+        return remarks;
+    }
 
-	public void setFoodAllergy ( String foodAllergy )
-	{
-		this.foodAllergy = foodAllergy;
-	}
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
-	public String getRemarks ()
-	{
-		return remarks;
-	}
+    public String getBookType() {
+        return bookType;
+    }
 
-	public void setRemarks ( String remarks )
-	{
-		this.remarks = remarks;
-	}
+    public void setBookType(String bookType) {
+        this.bookType = bookType;
+    }
 
-	public Date getResvDate ()
-	{
-		return resvDate;
-	}
+    public List<UserDetails> getGuestName() {
+        return guestName;
+    }
 
-	public void setResvDate ( Date resvDate )
-	{
-		this.resvDate = resvDate;
-	}
+    public void setGuestName(List<UserDetails> guestName) {
+        this.guestName = guestName;
+    }
 
-	public String getStatus ()
-	{
-		return status;
-	}
-
-	public void setStatus ( String status )
-	{
-		this.status = status;
-	}
-
-	@Override
-	public String toString ()
-	{
-		return "Booking{" + "reservationId=" + reservationId + ", outlet='" + outlet + '\'' + ", villaNo='" + villaNo + '\'' + ", guestName='" + guestName + '\'' + ", mealPlan='" + mealPlan + '\'' + ", noOfPax=" + noOfPax + ", noOfTables=" + noOfTables + ", resvDate=" + resvDate + ", bookedBy='" + bookedBy + '\'' + ", bookedDt='" + bookedDt + '\'' + ", foodAllergy='" + foodAllergy + '\'' + ", remarks='" + remarks + '\'' + ", status='" + status + '\'' + '}';
-	}
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "reservationId=" + reservationId +
+                ", outlet='" + outlet + '\'' +
+                ", villaNo='" + villaNo + '\'' +
+                ", mealPlan='" + mealPlan + '\'' +
+                ", noOfPax=" + noOfPax +
+                ", noOfTables=" + noOfTables +
+                ", resvDate=" + resvDate +
+                ", bookedBy='" + bookedBy + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", status='" + bookType + '\'' +
+                ", userDetails=" + guestName +
+                '}';
+    }
 }

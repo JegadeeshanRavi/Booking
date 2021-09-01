@@ -15,8 +15,8 @@ public interface BookingRepo extends CrudRepository <Booking, Integer>
 {
 	List <Booking> findByVillaNoAndResvDate ( String villaNo, Date resvDate );
 
-	@Query ( "SELECT u FROM Booking u WHERE u.status = :status and u.resvDate >= :resvDate" )
-	List <Booking> findByStatusAndResvDate ( @Param ( "status" ) String status, @Param ( "resvDate" ) Date resvDate );
+	@Query ( "SELECT u FROM Booking u WHERE u.bookType = :status and u.resvDate >= :resvDate" )
+	List <Booking> findByBookTypeAndResvDate ( @Param ( "status" ) String status, @Param ( "resvDate" ) Date resvDate );
 
 	@Override
 	List <Booking> findAll ();
